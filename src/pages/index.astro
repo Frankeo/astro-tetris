@@ -1,0 +1,46 @@
+---
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Tetris</title>
+  </head>
+  <body>
+    <div class="menu">
+      <h1>Tetris</h1>
+      <div><p>Scorage:</p><p id="scorage">0</p></div>
+    </div>
+    <canvas width="280" height="600"></canvas>
+  </body>
+</html>
+
+<script>
+  import { generateGame } from "../tetris";
+  generateGame();
+</script>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  div {
+    display: flex;
+  }
+  .menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 280px;
+  }
+  p {
+    font-weight: bold;
+    font-size: larger;
+  }
+</style>
