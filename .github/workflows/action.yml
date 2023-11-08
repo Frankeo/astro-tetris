@@ -1,19 +1,33 @@
-name: 'My Workflow'
+name: Deploy to Netlify
 
 on:
+  # Trigger the workflow every time you push to the `main` branch
+  # Using a different branch name? Replace `main` with your branch’s name
   push:
-    branches:
-      - main
+    branches: [main]
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
+
+# Allow this job to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: 'Deploy to Netlify'
+    environment:
+      name: netlify-page
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: jsmrcaga/action-netlify-deploy@v2.0.0
+      - name: Checkout your repository using git
+        uses: actions/checkout@v3
+      - name: Deploy to Netlify
+        uses: jsmrcaga/action-netlify-deploy@master
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          build_directory: dist
-          build_command: yarn build
+          NETLIFY_DEPLOY_MESSAGE: "Prod deploy v${{ github.ref }}"
           NETLIFY_DEPLOY_TO_PROD: true
+          build_directory: dist
