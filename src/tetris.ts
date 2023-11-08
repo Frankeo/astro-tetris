@@ -13,3 +13,9 @@ export function generateGame() {
     drawBoard(ctx, board);
     addInteractions(ctx, board, piece);
 }
+
+export function playMusic() {
+    const music = new Audio("./Tetris.mp3");
+    music.loop = true;
+    music.play();
+}

@@ -6,7 +6,7 @@ import { addPiece, removePiece, solidifyPiece } from "./piece-manipulations";
 
 function dropPiece(piece: Piece, board: number[][]) {
     piece.position.y++
-    if(checkColissions(piece, board) || isPositionOcupied(piece, board)) {
+    if(checkColissions(piece, board)) {
         piece.position.y--
         solidifyPiece(piece, board)
         checkAndRemoveWinningRow(board)
@@ -53,6 +53,9 @@ function addMovements(ctx: CanvasRenderingContext2D, board : number[][], piece: 
         }
         if(event.key == "ArrowUp") {
             piece.shape = piece.shape[0].map((_val, index) => piece.shape.map(row => row[index]).reverse())
+            if(checkColissions(piece, board)) {
+                piece.shape = piece.shape[0].map((_val, index) => piece.shape.map(row => row[row.length-1-index]));
+            }
         }
         if(event.key === "ArrowDown") {
             dropPiece(piece, board)

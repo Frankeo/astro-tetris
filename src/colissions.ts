@@ -1,7 +1,7 @@
 import { BOARD_HEIGHT, BOARD_WIDTH } from "./constants";
 
-export function checkColissions(piece: Piece) {
-    return piece.position.x < 0 || (piece.position.x + piece.shape[0].length) > BOARD_WIDTH || (piece.position.y + piece.shape.length) > BOARD_HEIGHT;
+export function checkColissions(piece: Piece, board: number[][]) {
+    return piece.position.x < 0 || (piece.position.x + piece.shape[0].length) > BOARD_WIDTH || (piece.position.y + piece.shape.length) > BOARD_HEIGHT || isPositionOcupied(piece, board);
 }
 
 export function isPositionOcupied(piece: Piece, board: number[][]) {
