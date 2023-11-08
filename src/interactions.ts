@@ -37,25 +37,51 @@ function clearBoard(board: number[][]) {
 }
 
 function addMovements(ctx: CanvasRenderingContext2D, board : number[][], piece: Piece) {
+    let xDown: number | null = null;
+    let yDown: number | null = null;
+    document.addEventListener('touchstart', function(evt) {
+        xDown = evt.touches[0].clientX;                                      
+        yDown = evt.touches[0].clientY;                                      
+    }, false); 
+
+    document.addEventListener('touchmove', function(event) {
+        removePiece(piece, board)
+        if ( ! xDown || ! yDown ) {
+            return;
+        }
+        const xUp = event.touches[0].clientX;
+        const yUp = event.touches[0].clientY;
+        const xDiff = xDown - xUp;
+        const yDiff = yDown - yUp;
+        if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
+            if ( xDiff > 0 ) {
+                moveLeft(piece, board)
+            } else {
+                moveRight(piece, board)
+            }                       
+        } else {
+            if ( yDiff > 0 ) {
+                rotatePiece(piece, board)
+            } else { 
+                dropPiece(piece, board)
+            }                                                                 
+        }
+        xDown = null;
+        yDown = null;
+        addPiece(piece, board);
+        drawBoard(ctx, board);
+    }, false);
+    
     document.addEventListener("keydown", (event) => {
         removePiece(piece, board)
         if(event.key === "ArrowRight") {
-            piece.position.x++
-            if(checkColissions(piece, board)) {
-                piece.position.x--
-            }
+            moveRight(piece, board)
         }
         if(event.key === "ArrowLeft") {
-            piece.position.x--
-            if(checkColissions(piece, board)) {
-                piece.position.x++
-            }
+            moveLeft(piece, board)
         }
         if(event.key == "ArrowUp") {
-            piece.shape = piece.shape[0].map((_val, index) => piece.shape.map(row => row[index]).reverse())
-            if(checkColissions(piece, board)) {
-                piece.shape = piece.shape[0].map((_val, index) => piece.shape.map(row => row[row.length-1-index]));
-            }
+            rotatePiece(piece, board)
         }
         if(event.key === "ArrowDown") {
             dropPiece(piece, board)
@@ -65,7 +91,26 @@ function addMovements(ctx: CanvasRenderingContext2D, board : number[][], piece: 
     })
 }
 
+function moveRight(piece: Piece, board: number[][]) {
+    piece.position.x++
+    if(checkColissions(piece, board)) {
+        piece.position.x--
+    }
+}
 
+function moveLeft(piece: Piece, board: number[][]) {
+    piece.position.x--
+    if(checkColissions(piece, board)) {
+        piece.position.x++
+    }
+}
+
+function rotatePiece(piece: Piece, board: number[][]) {
+    piece.shape = piece.shape[0].map((_val, index) => piece.shape.map(row => row[index]).reverse())
+    if(checkColissions(piece, board)) {
+        piece.shape = piece.shape[0].map((_val, index) => piece.shape.map(row => row[row.length-1-index]));
+    }
+}
 
 function checkAndRemoveWinningRow(board : number[][]) {
     board.forEach((row, y) => {
