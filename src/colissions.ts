@@ -1,5 +1,4 @@
 import { BOARD_HEIGHT, BOARD_WIDTH } from "./constants";
-import { type Piece } from "./env";
 
 export function checkColissions(piece: Piece, board: number[][]): boolean {
   const pieceMaxX = piece.shape[0].length;

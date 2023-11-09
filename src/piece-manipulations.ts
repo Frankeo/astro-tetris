@@ -1,5 +1,3 @@
-import { type Piece } from "./env";
-
 function alterPiece(
   piece: Piece,
   board: number[][],

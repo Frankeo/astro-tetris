@@ -2,7 +2,6 @@
 import { checkColissions } from "./colissions";
 import { BOARD_WIDTH } from "./constants";
 import { drawBoard } from "./draw-helpers";
-import { type Piece } from "./env";
 import { generatePiece } from "./piece-generator";
 import { addPiece, removePiece, solidifyPiece } from "./piece-manipulations";
 
