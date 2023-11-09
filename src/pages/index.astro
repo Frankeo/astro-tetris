@@ -1,7 +1,3 @@
----
-
----
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -29,10 +25,10 @@
   import { generateGame, playMusic } from "../tetris";
 
   const instructions = document.querySelector("#instructions");
-  instructions!.addEventListener("click", () => {
+  instructions!.addEventListener("click", async () => {
     generateGame();
     instructions!.classList.add("is-hidden");
-    playMusic();
+    await playMusic();
   });
 </script>
 
@@ -43,28 +39,34 @@
     align-items: center;
     overscroll-behavior: contain;
   }
+
   div {
     display: flex;
   }
+
   span {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+
   .menu {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 280px;
   }
+
   button {
     font-weight: bolder;
     font-size: larger;
   }
+
   p {
     font-weight: bold;
     font-size: larger;
   }
+
   .is-hidden {
     display: none !important;
   }

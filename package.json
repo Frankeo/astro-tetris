@@ -6,12 +6,40 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
+    "lint": "stylelint '**/*.astro' && eslint '**/*.{ts,astro}'",
+    "check-format": "prettier . --check",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@astrojs/check": "^0.3.1",
-    "astro": "^3.4.3",
+    "astro": "^3.4.4",
+    "nanostores": "^0.9.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "bulma": "0.9.4",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard-with-typescript": "^39.0.0",
+    "eslint-plugin-astro": "^0.29.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "postcss-html": "^1.5.0",
+    "prettier": "3.0.3",
+    "prettier-plugin-astro": "^0.12.0",
+    "sass": "^1.66.1",
+    "stylelint": "^15.10.3",
+    "stylelint-config-html": "^1.1.0",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-standard": "^34.0.0",
     "typescript": "^5.2.2"
   }
 }

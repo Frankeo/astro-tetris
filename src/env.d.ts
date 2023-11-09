@@ -1,6 +1,6 @@
-/// <reference types="astro/client" />
+import "astro/client";
 
 interface Piece {
-    position : { x: number, y: number};
-    shape: number[][]
+  position: { x: number; y: number };
+  shape: number[][];
 }

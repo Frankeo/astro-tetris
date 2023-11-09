@@ -1,0 +1,5 @@
+{
+  "**/*.astro": "stylelint --fix",
+  "**/*": "prettier --write --ignore-unknown",
+  "**/*.{ts,astro}": "eslint --fix"
+}
